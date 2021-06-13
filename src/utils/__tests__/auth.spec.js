@@ -45,7 +45,13 @@ describe('Authentication', () => {
     test('creates user and sends new token from user', async () => {
       expect.assertions(2)
 
-      const req = { body: { email: 'exmaple@gmail.com', password: '1234567' } }
+      const req = {
+        body: {
+          username: 'John',
+          email: 'exmaple@gmail.com',
+          password: '1234567',
+        },
+      }
       const res = {
         status(status) {
           expect(status).toBe(201)
@@ -83,7 +89,9 @@ describe('Authentication', () => {
     test('user must be real', async () => {
       expect.assertions(3)
 
-      const req = { body: { email: 'exa@gmail.com', password: '123456' } }
+      const req = {
+        body: { username: 'John', email: 'exa@gmail.com', password: '123456' },
+      }
 
       const res = {
         status(status) {
@@ -99,8 +107,18 @@ describe('Authentication', () => {
 
     test('password should match', async () => {
       expect.assertions(2)
-      await User.create({ email: 'example@gmail.com', password: '12356' })
-      const req = { body: { email: 'example@gmail.com', password: '123456' } }
+      await User.create({
+        username: 'John',
+        email: 'example@gmail.com',
+        password: '12356',
+      })
+      const req = {
+        body: {
+          username: 'John',
+          email: 'example@gmail.com',
+          password: '123456',
+        },
+      }
       const res = {
         status(status) {
           expect(status).toBe(401)
@@ -115,7 +133,11 @@ describe('Authentication', () => {
 
     test('creates new token', async () => {
       expect.assertions(2)
-      const userField = { email: 'example@gmail.com', password: '123456' }
+      const userField = {
+        username: 'John',
+        email: 'example@gmail.com',
+        password: '123456',
+      }
       const createdUser = await User.create(userField)
       const req = { body: userField }
       const res = {
@@ -187,6 +209,7 @@ describe('Authentication', () => {
 
     test('finds user from token and passes on', async () => {
       const user = await User.create({
+        username: 'John',
         email: 'hello@hello.com',
         password: '1234',
       })
