@@ -55,6 +55,7 @@ This REST API was built with Node, and MongoDB for the databases. With this API,
 - Then add Authorization to API with `Bearer your-token`
 - After making Authorization do this request `http://localhost:3000/api/user`, you wil get user info
 - You can create,update and delete any items or lists with making api requests.
+- Check `server.js` file to see api routes
 
 ## Author
 
